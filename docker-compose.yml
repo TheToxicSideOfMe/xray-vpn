@@ -1,0 +1,35 @@
+services:
+  xray:
+    image: teddysun/xray
+    container_name: xray
+    restart: always
+    volumes:
+      - ./config:/etc/xray
+    networks:
+      - vpn-net
+
+  nginx:
+    image: nginx:alpine
+    container_name: nginx
+    restart: always
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx/conf.d:/etc/nginx/conf.d
+      - ./certbot/conf:/etc/letsencrypt
+      - ./certbot/www:/var/www/certbot
+    networks:
+      - vpn-net
+    depends_on:
+      - xray
+
+  certbot:
+    image: certbot/certbot
+    volumes:
+      - ./certbot/conf:/etc/letsencrypt
+      - ./certbot/www:/var/www/certbot
+
+networks:
+  vpn-net:
+    driver: bridge
