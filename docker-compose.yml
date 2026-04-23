@@ -5,6 +5,8 @@ services:
     restart: always
     volumes:
       - ./config:/etc/xray
+    ports:
+      - "30190:10000"
     networks:
       - vpn-net
 
@@ -21,8 +23,6 @@ services:
       - ./certbot/www:/var/www/certbot
     networks:
       - vpn-net
-    depends_on:
-      - xray
 
   certbot:
     image: certbot/certbot

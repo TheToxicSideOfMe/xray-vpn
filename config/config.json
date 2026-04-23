@@ -8,16 +8,17 @@
       "settings": {
         "clients": [
           {
-            "id": "YOUR-UUID-HERE",
+            "id": "aeb468a1-1727-42c0-82d4-efa0540dbbe9",
             "level": 0
           }
         ],
         "decryption": "none"
       },
       "streamSettings": {
-        "network": "xhttp",
-        "xhttpSettings": {
-          "path": "/ray"
+        "network": "ws",
+        "security": "none",
+        "wsSettings": {
+          "path": "/"
         }
       }
     }
